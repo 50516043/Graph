@@ -48,11 +48,10 @@ public class Graph_view extends Frame implements ActionListener,WindowListener{
 	    cpanel = new ChartPanel(chart);
 	    cpanel2 = new ChartPanel(chart2);
 	    
-	    
+	    //add(cpanel2, BorderLayout.CENTER);
+	   // cpanel2.setVisible(false);
 	    add(cpanel, BorderLayout.CENTER);
-	    
-	    //cpanel.setVisible(true);
-	    //cpanel2.setVisible(false);
+
 	    
 	    data.addValue(300, "USA", "2005");
 	    data.addValue(500, "USA", "2006");
@@ -115,13 +114,14 @@ public class Graph_view extends Frame implements ActionListener,WindowListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == button1){
-			cpanel.setVisible(false);
 			cpanel2.setVisible(true);
+			cpanel.setVisible(false);
 			add(cpanel2, BorderLayout.CENTER);
+			
 		}else if(e.getSource() == button2){
 			cpanel2.setVisible(false);
 			cpanel.setVisible(true);
-			add(cpanel, BorderLayout.CENTER);
+
 			
 		}
 	}
