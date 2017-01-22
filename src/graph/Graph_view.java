@@ -20,8 +20,6 @@ public class Graph_view extends Frame implements ActionListener,WindowListener{
 
 	private Button button1 = new Button("BarChart");
 	private Button button2 = new Button("LineChart");
-	ChartPanel cpanel;
-	ChartPanel cpanel2;
 	
 	public Graph_view(){
 		addWindowListener(this);
@@ -36,23 +34,11 @@ public class Graph_view extends Frame implements ActionListener,WindowListener{
 	                                   true,
 	                                   false,
 	                                   false);
-		JFreeChart chart2 = 
-	    		ChartFactory.createBarChart("Import Volume",
-	                                   "Year",
-	                                   "Ton",
-	                                   data,
-	                                   PlotOrientation.VERTICAL,
-	                                   true,
-	                                   false,
-	                                   false);
-	    cpanel = new ChartPanel(chart);
-	    cpanel2 = new ChartPanel(chart2);
+
+		ChartPanel cpanel = new ChartPanel(chart);
 	    
-	    //add(cpanel2, BorderLayout.CENTER);
-	   // cpanel2.setVisible(false);
 	    add(cpanel, BorderLayout.CENTER);
 
-	    
 	    data.addValue(300, "USA", "2005");
 	    data.addValue(500, "USA", "2006");
 	    data.addValue(120, "USA", "2007");
@@ -62,7 +48,7 @@ public class Graph_view extends Frame implements ActionListener,WindowListener{
 	    data.addValue(320, "China", "2007");
 	    
 	    cpanel.add(button1);
-	    cpanel2.add(button2);
+	    cpanel.add(button2);
 	    button1.addActionListener(this);
 	    button2.addActionListener(this);
 	    
@@ -113,16 +99,45 @@ public class Graph_view extends Frame implements ActionListener,WindowListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		DefaultCategoryDataset data = new DefaultCategoryDataset();
+		
+		data.addValue(300, "USA", "2005");
+	    data.addValue(500, "USA", "2006");
+	    data.addValue(120, "USA", "2007");
+	    
+	    data.addValue(200, "China", "2005");
+	    data.addValue(400, "China", "2006");
+	    data.addValue(320, "China", "2007");
+	    
 		if(e.getSource() == button1){
-			cpanel2.setVisible(true);
-			cpanel.setVisible(false);
-			add(cpanel2, BorderLayout.CENTER);
-			
+			JFreeChart chart1 = 
+		    		ChartFactory.createLineChart ("Import Volume",
+		                                   "Year",
+		                                   "Ton",
+		                                   data,
+		                                   PlotOrientation.VERTICAL,
+		                                   true,
+		                                   false,
+		                                   false);			    
+			    
+			    ChartPanel cpanel1 = new ChartPanel(chart1);
+			    add(cpanel1, BorderLayout.CENTER);
+				setVisible(true);
+	
 		}else if(e.getSource() == button2){
-			cpanel2.setVisible(false);
-			cpanel.setVisible(true);
+			JFreeChart chart2 = 
+		    		ChartFactory.createBarChart("Import Volume",
+		                                   "Year",
+		                                   "Ton",
+		                                   data,
+		                                   PlotOrientation.VERTICAL,
+		                                   true,
+		                                   false,
+		                                   false);
 
-			
+		    ChartPanel cpanel2 = new ChartPanel(chart2);
+		    add(cpanel2, BorderLayout.CENTER);
+			setVisible(true);
 		}
 	}
 	
